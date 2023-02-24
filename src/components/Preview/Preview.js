@@ -7,7 +7,7 @@ import {
 } from './export_css';
 import './pageSetup.css';
 
-const Preview = ({ html, pageSize, selectcolumn }) => {
+const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
 	const [isOpen, setIsOpen] = useState(true);
 	const [currentpage, setCurrentPage] = useState(null);
   const [columnSetting, setColumnSetting] =useState(null);
@@ -47,7 +47,7 @@ const Preview = ({ html, pageSize, selectcolumn }) => {
         <meta name="description" content="">
       </head>
       <body class="body">
-      <div id="paper" class="newspaper page m-5 ${pageSize.value}">`;
+      <div id="paper" class="newspaper page ${pageSize.value}">`;
 			inlineData += html;
 			inlineData += '</div></body></html>';
 			setCurrentHtml(inlineData);
@@ -70,14 +70,27 @@ const Preview = ({ html, pageSize, selectcolumn }) => {
 			doubleColumn();
 		}
 	}, [selectcolumn]);
+
+	useEffect(()=>{
+		// const _style = document.getElementById('paper');
+		// console.log(currentHtml, 'id')
+		if(pageMargin && currentHtml){
+			const _style = document.getElementById('paper');
+			console.log(_style)
+			_style.style.padding=`${pageMargin}px`;
+			// _style.classList?.add(`padding:${pageMargin}`);
+			// console.log(_style.classList?.add(`padding:${pageMargin}`), 'style')
+		}
+	},[pageMargin])
 	// console.log(selectcolumn,html);
+	console.log(pageMargin, 'hello world')
 	return (
 		<>
 			<div className='container mx-auto mt-12'>
 				<div className='grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3'>
 					<div className='w-screen h-screen px-4 py-5'>
 							{currentHtml && (
-								<div contentEditable="true" className={`${pageSize.value} flex space-x-4 `}
+								<div contentEditable="true" className={`${pageSize.value} flex space-x-4} `}
 									onClick={(e) => handleClick(e)}
 									dangerouslySetInnerHTML={{
 										__html: currentHtml,
