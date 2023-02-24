@@ -1,25 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React, {  useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../App.context';
-import {
-	css_1_col_ltr,
-	css_2_col_ltr,
-} from './export_css';
+import { css_1_col_ltr, css_2_col_ltr } from './export_css';
 import './pageSetup.css';
 
-const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
+const Preview = ({ html, pageSize, selectcolumn, pageMargin }) => {
 	const [isOpen, setIsOpen] = useState(true);
 	const [currentpage, setCurrentPage] = useState(null);
-  const [columnSetting, setColumnSetting] =useState(null);
+	const [columnSetting, setColumnSetting] = useState(null);
 
-  const{
-    state:{
-      currentHtml
-    },
-    actions:{
-      setCurrentHtml
-    }
-  } = useContext(AppContext)
+	const {
+		state: { currentHtml },
+		actions: { setCurrentHtml },
+	} = useContext(AppContext);
 
 	const handleClick = (e) => {
 		console.log('Yo', e.target);
@@ -28,10 +21,10 @@ const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
 	};
 
 	const sigleColumn = () => {
-		setColumnSetting(css_1_col_ltr)
+		setColumnSetting(css_1_col_ltr);
 	};
 	const doubleColumn = () => {
-		setColumnSetting(css_2_col_ltr)
+		setColumnSetting(css_2_col_ltr);
 	};
 	useEffect(() => {
 		if (html) {
@@ -46,20 +39,21 @@ const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
         <meta name="description" content="">
       </head>
       <body class="body">
-      <div id="paper" class="newspaper page ${pageSize.value}">`;
-			inlineData += html;
+      <div id="paper" class="newspaper page ${pageSize.value}" style='overflow: scroll;'>`;
+			// style=${selectcolumn ==='single' && 'display:inline-table; background:#eee;'}
+	  inlineData += html;
 			inlineData += '</div></body></html>';
 			setCurrentHtml(inlineData);
 		}
-	}, [html,columnSetting]);
-  useEffect(()=>{
-    if (pageSize.value && currentHtml){
-      console.log(currentHtml,currentpage,pageSize.value);
-      const _style = document.getElementById('paper');
-      _style.classList.replace(currentpage,pageSize.value);
-    }
-    setCurrentPage(pageSize.value)
-  },[pageSize.value])
+	}, [html, columnSetting]);
+	useEffect(() => {
+		if (pageSize.value && currentHtml) {
+			console.log(currentHtml, currentpage, pageSize.value);
+			const _style = document.getElementById('paper');
+			_style.classList.replace(currentpage, pageSize.value);
+		}
+		setCurrentPage(pageSize.value);
+	}, [pageSize.value]);
 
 	useEffect(() => {
 		if (selectcolumn === 'single') {
@@ -70,34 +64,33 @@ const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
 		}
 	}, [selectcolumn]);
 
-	useEffect(()=>{
+	useEffect(() => {
 		// const _style = document.getElementById('paper');
 		// console.log(currentHtml, 'id')
-		if(pageMargin && currentHtml){
+		if (pageMargin && currentHtml) {
 			const _style = document.getElementById('paper');
-			console.log(_style)
-			_style.style.padding=`${pageMargin}px`;
+			console.log(_style);
+			_style.style.padding = `${pageMargin}px`;
 			// _style.classList?.add(`padding:${pageMargin}`);
 			// console.log(_style.classList?.add(`padding:${pageMargin}`), 'style')
 		}
-	},[pageMargin])
-	// console.log(selectcolumn,html);
-	console.log(pageMargin, 'hello world')
+	}, [pageMargin]);
 	return (
 		<>
-			<div className='container mx-auto mt-12'>
-				<div className='grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3'>
-					<div className='px-4 py-5'>
-							{currentHtml && (
-								<div id='previewDiv' contentEditable="true" className={`${pageSize.value} flex space-x-4 `}
-									onClick={(e) => handleClick(e)}
-									dangerouslySetInnerHTML={{
-										__html: currentHtml,
-									}}
-								/>
-							)}
-					</div>
-				</div>
+			<div className='container mt-4'>
+				{/* <div className='grid grid-cols-3 gap-6 mb-6 lg:grid-cols-3'> */}
+					{currentHtml && (
+						<div
+							id='previewDiv'
+							contentEditable='true'
+							className={`${pageSize.value} flex space-x-4`}
+							onClick={(e) => handleClick(e)}
+							dangerouslySetInnerHTML={{
+								__html: currentHtml,
+							}}
+						/>
+					)}
+				{/* </div> */}
 			</div>
 		</>
 	);
