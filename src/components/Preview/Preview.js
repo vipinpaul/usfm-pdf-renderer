@@ -1,24 +1,26 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment, useEffect, useState } from 'react';
+import React, {  useEffect, useState,useContext } from 'react';
+import { AppContext } from '../../App.context';
 import {
 	css_1_col_ltr,
 	css_2_col_ltr,
-	css_1_col_rtl,
-	css_2_col_rtl,
 } from './export_css';
 import './pageSetup.css';
-// import './ToHtml.css'
 
-// const style1 = '\
-// .color-red{color:red},\
-// body{color:green}'
 const Preview = ({ html, pageSize, selectcolumn }) => {
 	const [isOpen, setIsOpen] = useState(true);
 	const [currentpage, setCurrentPage] = useState(null);
-	const [currentHtml, setCurrentHtml] = useState();
-	// const parser = new DOMParser();
-	// const htmlDoc = parser.parseFromString(htmlString, 'text/html');
-	// console.log({ htmlDoc });
+  const [columnSetting, setColumnSetting] =useState(null);
+
+  const{
+    state:{
+      currentHtml
+    },
+    actions:{
+      setCurrentHtml
+    }
+  } = useContext(AppContext)
+
 	const handleClick = (e) => {
 		console.log('Yo', e.target);
 		console.log(e.target);
@@ -27,22 +29,18 @@ const Preview = ({ html, pageSize, selectcolumn }) => {
 	};
 
 	const sigleColumn = () => {
-		const _style = document.createElement('style');
-		document.head.appendChild(_style);
-		_style.innerHTML = css_1_col_ltr;
+		setColumnSetting(css_1_col_ltr)
 	};
 	const doubleColumn = () => {
-		const _style = document.createElement('style');
-		document.head.appendChild(_style);
-		_style.innerHTML = css_2_col_ltr;
+		setColumnSetting(css_2_col_ltr)
 	};
 	useEffect(() => {
-		console.log('Yo');
 		if (html) {
 			let inlineData = `<!DOCTYPE html>
     <html lang="en">
       <head>
       <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+      ${columnSetting}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,7 +52,7 @@ const Preview = ({ html, pageSize, selectcolumn }) => {
 			inlineData += '</div></body></html>';
 			setCurrentHtml(inlineData);
 		}
-	}, [html]);
+	}, [html,columnSetting]);
   useEffect(()=>{
     if (pageSize.value && currentHtml){
       console.log(currentHtml,currentpage,pageSize.value);
@@ -79,7 +77,7 @@ const Preview = ({ html, pageSize, selectcolumn }) => {
 				<div className='grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3'>
 					<div className='w-screen h-screen px-4 py-5'>
 							{currentHtml && (
-								<div contenteditable="true" className={`${pageSize.value} flex space-x-4 `}
+								<div contentEditable="true" className={`${pageSize.value} flex space-x-4 `}
 									onClick={(e) => handleClick(e)}
 									dangerouslySetInnerHTML={{
 										__html: currentHtml,

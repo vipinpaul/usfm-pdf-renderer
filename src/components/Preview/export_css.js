@@ -1,10 +1,11 @@
 const css_1_col_ltr = `<style >
 body {
-    margin: 0;
-    padding: 0;
+    margin: 1rem;
+    padding: 1rem;
 }
 p {
     font-size: 100%;
+    color:red;
 }
 
 .newspaper ul li ol li:before {
