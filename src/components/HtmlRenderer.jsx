@@ -9,6 +9,7 @@ const Preview = React.lazy(() => import('./Preview/Preview'));
 const HtmlRenderer = () => {
   const { htmlString } = perf2html(usfmData);
   const [pageSize, setPagesize] = useState();
+  const [pageMargin, setPageMargin] = useState()
   const [selectcolumn, setSelectcolumn] = useState()
   return (
     <>
@@ -17,11 +18,11 @@ const HtmlRenderer = () => {
       {/* <Preview html={htmlString}/> */}
       <div className='flex'>
         <div className='flex flex-col h-screen p-3 bg-white shadow w-60'>
-          <Sidebar setPagesize={setPagesize} setSelectcolumn={setSelectcolumn} />
+          <Sidebar setPagesize={setPagesize} setPageMargin={setPageMargin} setSelectcolumn={setSelectcolumn} />
         </div>
         <div>
           <Suspense fallback={<div> Please Wait... </div>} >
-            <Preview html={htmlString} pageSize={pageSize} selectcolumn={selectcolumn} />
+            <Preview html={htmlString} pageSize={pageSize} pageMargin={pageMargin} selectcolumn={selectcolumn} />
           </Suspense>
         </div>
 

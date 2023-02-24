@@ -1,7 +1,8 @@
 import React from 'react';
 import ColumnSwitch from './ColumnSwitch';
+import MarginPage from './MarginPage';
 import PageStyle from './PageMenu';
-export default function Sidebar({setPagesize,setSelectcolumn}) {
+export default function Sidebar({setPagesize,setSelectcolumn, setPageMargin}) {
 	return (
     <div className='space-y-3'>
       <div className='flex items-center'>
@@ -12,6 +13,7 @@ export default function Sidebar({setPagesize,setSelectcolumn}) {
           <li className='rounded-sm'>
             <PageStyle setPagesize={setPagesize}/>
           </li>
+          <li><MarginPage setPageMargin={setPageMargin} /></li>
           <li className='rounded-sm'>
             <ColumnSwitch setSelectcolumn={setSelectcolumn}/>
           </li>
