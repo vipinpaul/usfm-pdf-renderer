@@ -25,7 +25,6 @@ const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
 		console.log('Yo', e.target);
 		console.log(e.target);
 		e.target.classList.add('color-red');
-		// setCurrentSelected(e.target);
 	};
 
 	const sigleColumn = () => {
@@ -88,9 +87,9 @@ const Preview = ({ html, pageSize, selectcolumn,pageMargin }) => {
 		<>
 			<div className='container mx-auto mt-12'>
 				<div className='grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3'>
-					<div className='w-screen h-screen px-4 py-5'>
+					<div className='px-4 py-5'>
 							{currentHtml && (
-								<div contentEditable="true" className={`${pageSize.value} flex space-x-4} `}
+								<div id='previewDiv' contentEditable="true" className={`${pageSize.value} flex space-x-4 `}
 									onClick={(e) => handleClick(e)}
 									dangerouslySetInnerHTML={{
 										__html: currentHtml,

@@ -14,8 +14,6 @@ const HtmlRenderer = () => {
   return (
     <>
       <MenuBar />
-      {/* <SideBar/> */}
-      {/* <Preview html={htmlString}/> */}
       <div className='flex'>
         <div className='flex flex-col h-screen p-3 bg-white shadow w-60'>
           <Sidebar setPagesize={setPagesize} setPageMargin={setPageMargin} setSelectcolumn={setSelectcolumn} />
@@ -25,7 +23,6 @@ const HtmlRenderer = () => {
             <Preview html={htmlString} pageSize={pageSize} pageMargin={pageMargin} selectcolumn={selectcolumn} />
           </Suspense>
         </div>
-
       </div>
     </>
   );

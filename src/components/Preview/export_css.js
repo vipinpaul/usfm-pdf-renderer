@@ -5,7 +5,6 @@ body {
 }
 p {
     font-size: 100%;
-    color:red;
 }
 
 .newspaper ul li ol li:before {
@@ -28,8 +27,7 @@ body {
 
 .newspaper {
     -webkit-column-count: 1;
-    -moz-column-count: 1;
-    column-count: 1;
+  
 }	/* Note: margin-right was previously set in additional .newspaper{} at the end of CSS.  It is now commented out as FF was increasing this recursively +2px to each page on print. */
 
 .chapter {
@@ -352,8 +350,8 @@ body {
 
 const css_1_col_rtl = `<style>
     body {
-        margin: 0;
-        padding: 0;
+      margin: 1rem;
+      padding: 1rem;
     }
     p {
         font-size: 100%;
