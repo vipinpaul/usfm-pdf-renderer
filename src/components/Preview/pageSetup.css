@@ -1,0 +1,50 @@
+.body {
+  background: rgb(204, 204, 204);
+}
+
+.page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+
+.A4 {
+  width: 21cm;
+  height: 29.7cm;
+}
+
+.A4Landscape {
+  width: 29.7cm;
+  height: 21cm;
+}
+
+.A5 {
+  width: 14.8cm;
+  height: 21cm;
+}
+
+.A5Landscape {
+  width: 21cm;
+  height: 14.8cm;
+}
+
+.A3 {
+  width: 29.7cm;
+  height: 42cm;
+}
+
+.A3Landscape {
+  width: 42cm;
+  height: 21cm;
+}
+
+@media print {
+
+  body,
+  page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
