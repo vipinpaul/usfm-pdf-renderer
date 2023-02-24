@@ -1,7 +1,17 @@
-import { useState } from 'react';
+import { useState,useContext   } from 'react';
+
+import { AppContext } from '../../App.context';
 
 export default function NavBar() {
 	const [navbar, setNavbar] = useState(false);
+  const {
+    actions: {
+      setPrintPreview,
+    }
+  } = useContext(AppContext)
+  const handlePrint = () => {
+    setPrintPreview(true)
+  };
 
 	return (
 		<nav className='w-full bg-blue-500 shadow'>
@@ -47,7 +57,7 @@ export default function NavBar() {
 					</div>
 				</div>
 				<div className='hidden space-x-2 md:inline-block'>
-					<button
+					<button  onClick={handlePrint}
 						className='px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800'>
 						Print
 					</button>
