@@ -10,29 +10,22 @@ export function AppContextProvider({
   const [printPreview, setPrintPreview] = useState(false)
   const [html, setHtml] = useState(null);
   const [htmlString, setHtmlString] = useState(null);
-	const [currentHtml, setCurrentHtml] = useState();
+  const [currentHtml, setCurrentHtml] = useState();
 
   useEffect(() => {
-    
-    // const fetchHtml = async () => {
-    //   const {htmlString} = perf2html(usfmData)
-    //   setHtml(htmlString);
-    //   setPrintPreview(false)
-    // }
-    
-
-    if ( printPreview ) {
-      console.log("print preview was clicked");
-      // fetchHtml();
+    if (printPreview) {
+      const updatedHtml = document.getElementById("previewDiv").innerHTML;
+      setCurrentHtml(updatedHtml)
       setHtml(currentHtml)
+      setPrintPreview(false)
     }
   }, [printPreview]);
 
   useEffect(() => {
-    if ( html ) {
-      // console.log("html data is available",{html})
-      const newPage = window.open('','','_window');
-      // newPage.document.head.innerHTML = 
+    if (html) {
+      const newPage = window.open('', '', '_window');
+
+            // newPage.document.head.innerHTML = 
       // `<head>
       //     <meta charset="UTF-8"/>
       //     <title>PDF Render</title>
@@ -70,10 +63,12 @@ export function AppContextProvider({
       // // console.log({style})
       // // newPage.document.head.appendChild(style);
       // // newPage.document.body.innerHTML = html.replace(/^[\s\S]*<body>/, "").replace(/<\/body>[\s\S]*/, "");      
-      newPage.document.body.innerHTML = currentHtml   
+
+
+      newPage.document.body.innerHTML = currentHtml
       setHtml(null);
     }
-  }, [html])
+  }, [html, currentHtml])
 
 
 

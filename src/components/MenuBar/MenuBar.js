@@ -59,7 +59,7 @@ export default function NavBar() {
 				<div className='hidden space-x-2 md:inline-block'>
 					<button  onClick={handlePrint}
 						className='px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800'>
-						Print
+						Print Preview
 					</button>
           {/* className='px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100'> */}
 				</div>
